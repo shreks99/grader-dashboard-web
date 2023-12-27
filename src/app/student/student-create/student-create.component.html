@@ -1,0 +1,61 @@
+<div mat-dialog-title>
+    <h1>Student Register Form</h1>
+</div>
+<form [formGroup]="studentForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Student ID</mat-label>
+                <input matInput type="number" placeholder="Type..." formControlName="studentID">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>NetID</mat-label>
+                <input matInput type="text" placeholder="Type..." formControlName="netID">
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>First name</mat-label>
+                <input matInput type="text" placeholder="Type..." formControlName="firstName">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input matInput type="text" placeholder="Type..." formControlName="lastName">
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" placeholder="xyz@ucr.edu" formControlName="email">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Date of Birth</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dob">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-radio-group aria-label="Select an option" formControlName="gender">
+                <mat-label><b>Gender</b></mat-label>
+                <mat-radio-button value="male">Male</mat-radio-button>
+                <mat-radio-button value="female">Female</mat-radio-button>
+                <mat-radio-button value="others">Others</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="row">
+            <mat-form-field appreance="outline">
+                <mat-label>Choose a branch</mat-label>
+                <mat-select formControlName="branch">
+                <mat-option *ngFor="let val of branch" [value]="val">{{val}}</mat-option>
+                <!-- <mat-option value="option2" disabled>Option 2 (disabled)</mat-option> -->
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button color="warn"> Cancel</button>
+        <button mat-raised-button color="primary" type="submit"> Save</button>
+    </div>
+</form>
