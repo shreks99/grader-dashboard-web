@@ -9,7 +9,9 @@ import {MatDatepickerModule,} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { StudentService } from '../student.service';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-student-create',
@@ -25,35 +27,46 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
     MatNativeDateModule,
     MatRadioModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
-  providers: [
-    MatDatepickerModule,
-    MatNativeDateModule,
-  ],
+  providers: [],
   templateUrl: './student-create.component.html',
   styleUrls: ['./student-create.component.scss']
 })
 export class StudentCreateComponent {
   studentForm: FormGroup;
-  branch: string[] = ['Computer Science', 'Computer Engineering'];
+  branch: string[] = ['Computer Science', 'Computer Engineering','Others'];
 
-  constructor(private _fb:FormBuilder) {
+  constructor(
+    private _fb:FormBuilder,
+    private _studentService: StudentService,
+    private _dialogRef: DialogRef<StudentCreateComponent>
+    ) {
     this.studentForm = this._fb.group({
-      studentID: '',
-      netID: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      dob: '',
-      gender: '',
-      branch: '',
+      studentID: ['',[Validators.required]],
+      netID: ['',[Validators.required]],
+      fullName: ['',[Validators.required]],
+      email: ['',[Validators.required]],
+      dob: ['',[Validators.required]],
+      gender: ['',[Validators.required]],
+      branch: ['',[Validators.required]],
     })
   }
 
   onFormSubmit() {
     if(this.studentForm.valid) {
       console.log(this.studentForm.value);
+      this._studentService.createStudent(this.studentForm.value).subscribe({
+        next: (val:any) => {
+          alert('Employee Added Successfully');
+          this._dialogRef.close();
+        },
+        error:(err:any) => {
+          console.log(err);
+          
+        }
+      })
       
     }
   }

@@ -15,12 +15,8 @@
         </div>
         <div class="row">
             <mat-form-field appearance="outline">
-                <mat-label>First name</mat-label>
-                <input matInput type="text" placeholder="Type..." formControlName="firstName">
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Last Name</mat-label>
-                <input matInput type="text" placeholder="Type..." formControlName="lastName">
+                <mat-label>fullName</mat-label>
+                <input matInput type="text" placeholder="Type..." formControlName="fullName">
             </mat-form-field>
         </div>
         <div class="row">
@@ -45,14 +41,14 @@
             </mat-radio-group>
         </div>
         <div class="row">
-            <mat-form-field appreance="outline">
+            <mat-form-field appearance="outline">
                 <mat-label>Choose a branch</mat-label>
                 <mat-select formControlName="branch">
-                <mat-option *ngFor="let val of branch" [value]="val">{{val}}</mat-option>
-                <!-- <mat-option value="option2" disabled>Option 2 (disabled)</mat-option> -->
+                    <mat-option *ngFor="let val of branch" [value]="val">{{val}}</mat-option>
+                    <!-- <mat-option value="option2" disabled>Option 2 (disabled)</mat-option> -->
                 </mat-select>
             </mat-form-field>
-        </div>
+        </div>        
     </div>
     <div mat-dialog-actions class="action">
         <button mat-raised-button color="warn"> Cancel</button>
