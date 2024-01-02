@@ -56,6 +56,7 @@ export class StudentCreateComponent {
 
   onFormSubmit() {
     if(this.studentForm.valid) {
+      this.studentForm.value.dob = this.formatDateToISO(this.studentForm.value.dob);
       console.log(this.studentForm.value);
       this._studentService.createStudent(this.studentForm.value).subscribe({
         next: (val:any) => {
@@ -66,8 +67,10 @@ export class StudentCreateComponent {
           console.log(err);
           
         }
-      })
-      
+      });
     }
+  }
+  private formatDateToISO(date: Date): string {
+    return date.toISOString().split('T')[0]; // Formats date to 'YYYY-MM-DD'
   }
 }
